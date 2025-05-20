@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A form</title>
+  </head>
+  <body>
+    <form action="#0" method="GET">
+      <fieldset>
+        <legend>Login</legend>
+        <p>
+          <label for="email">Email</label><br />
+          <input type="email" name="email" id="email" />
+        </p>
+
+        <p>
+          <label for="name">Password</label><br />
+          <input type="password" name="password" id="password" />
+        </p>
+
+        <p>
+          User Type: &nbsp;
+          <input type="radio" name="userType" id="user" value="user" />
+          <label for="user">User</label>
+          <input type="radio" name="userType" id="admin" value="admin" />
+          <label for="admin">Admin</label>
+        </p>
+
+        <input type="submit" />
+      </fieldset>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+Product Backlog
+-Make calls
+-Recieve calls
+-Send sms
+- Recieve sms
+
+
+1st Sprint
+
+Make calls ----   Title       Story Points       Assigned TO                            Description                                                     Remarks                                   
+Call Interface 
+                  mkcall -cp120                                                                      
+ -> Call list ------------------  6 -------------Member1
+   -> user details-------------   -6---------------Member2
+   -> add & delete contact ----   -4-----------------Member3
+-> call button------------------   4------------------Member1
+  -> speaker & mute-------------   6------------------^^^^^
+-> Keypad Design-----------------  6-----------------Member2
+-> Documnets---------------------  8-----------------member3
+
+
+2nd Sprint
+ Recieve calls
+                  rccall -cp121
+-> Incoming call Interface -----  6--------------------Member1 
+-> Accept call impl ------------  4---------------------Member3
+ -> speaker---------------------  4 
+ -> hold  ----------------------- 4
+-> deny call  impl----------------8---------------------Member2
+-> Keypad Design------------------8----------------------Member2
+-> prepare documents--------------8---------------------Member1
+3rd Sprint
+                    sndsms- cp122
+-> Compose sms impl -----------------8--------------------Member3
+-> create sms db---------------------6---------------------Member2
+  -> keypad design-------------------8---------------------Member2
+  -> send button---------------------4--------------------Member1
+  -> reply button--------------------6--------------------Member3
+-> prepare documents-----------------8---------------------Member1
+4th sprint
+Recieve sms
+                 rcsms - cp123
+-> Read sms impl------------------- 8-------------------------Member3
+ -> chat impl --------------------- 6-------------------------Member2
+->  sms options---------------------4------------------------Member3
+  -> Archive impl-------------------8------------------------Member1
+  -> delete-------------------------6------------------------Member1
+ -> prepare documnets --------------8-----------------------Member2

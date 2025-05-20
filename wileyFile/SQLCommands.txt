@@ -1,0 +1,42 @@
+sudo /etc/init.d/mysql start
+systemctl status mysql.service
+systemctl start mysql.service
+________________________________________________________________________
+
+
+ create table User(UserId int, password varchar(10),emailId varchar(18));
+
+INSERT INTO User
+(UserId,password,emailId)
+values
+(12,'pass','user12@gmail.com'),
+(14,'paws','user14@gmail.com'),
+(15,'hell',Null);
+
+_____________________________________________________________________________
+SELECT c.ingredient_name 
+  FROM recipes AS a
+  JOIN recipe_ingredients AS b
+    ON a.recipe_id = b.recipe_id
+  JOIN ingredients AS c
+    ON b.ingredient_id = c.ingredient_id
+ WHERE a.recipe_name = "Tomato Soup";
+
+______________________________________________________________________________
+Select * from
+        (select 
+        Country.name,
+        city.name,
+        city.population,
+        ROW_NUMBER() over(partition by Country.Name order by Country.Name,city.population desc) RowNum
+    from Country inner join city city on Country.Code=City.CountryCode) tbl
+    where RowNum = 1
+
+SELECT country.name, city.name, city.population
+     FROM   city 
+         JOIN country 
+         ON city.CountryCode = country.code
+     WHERE  city.population = (SELECT max(population)
+                             FROM   city c2
+                             WHERE  city.countryCode = c2.countryCode)
+     ORDER BY country;

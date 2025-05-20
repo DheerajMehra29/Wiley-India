@@ -1,0 +1,109 @@
+<servlet>
+	<servlet-name>HomeController</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	
+</servlet>
+<servlet-mapping>
+	<servlet-name>HomeController</servlet-name>
+	<url-pattern>/r</url-pattern>
+	<load-on-startup>1</load-on-startup>
+</servlet-mapping>
+<servlet>
+	<servlet-name>RegistrationController</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	
+</servlet>
+<servlet-mapping>
+	<servlet-name>RegistrationController</servlet-name>
+	<url-pattern>/register	</url-pattern>
+	<load-on-startup>1</load-on-startup>
+</servlet-mapping>
+<servlet>
+	<servlet-name>LoginController</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+	<servlet-name>LoginController</servlet-name>
+	<url-pattern>/login</url-pattern>
+	<load-on-startup>1</load-on-startup>
+</servlet-mapping>
+
+
+
+
+
+
+HomeController.java
+
+
+@Controller
+public class HomeController.java{
+	@RequestMapping("/")
+	public String sendHome(ModelMap model){
+		model.addAttribute("homemessage", "Home Page");
+		return "Welcome, this is the home page";
+	}
+}
+
+
+
+RegistrationController.java
+
+
+@Controller
+public class RegistrationController{
+	@RequestMapping("/register", method = RequestMethod.POST)
+	public String sendRegister(ModelMap model){
+		model.addAttribute("registermsg", "registration Page");
+		return "Registration successful";
+	}
+}
+
+
+
+
+LoginController.java
+
+
+@Controller
+public class LoginController{
+	@RequestMapping("/login", method = RequestMethod.GET)
+	public String sendLogin(ModelMap model){
+		model.addAttribute("loginmessage", "Login page");
+		return "Login successful";
+	}
+}
+
+__________________________________________________________________________________________________________________________________________________
+Create a controller which defines username and password. 
+Send encrypted password to the jsp file.
+Also define an array of suggested passwords in
+the controller and send the array to jsp.
+In the jsp file, display a greeting message for the user
+along with password expiry message.
+And show the array of suggested passwords.
+Bonus- Display the array of suggested passwords as a bulleted list.
+_______________________________________________________________________________________________
+
+Create:
+-> Ordered list
+-> Unordered list
+-> Tables
+-> Images
+-> Nav
+-> Footer
+
+___________________________________________________________________________________________________________________
+Design a bootstrap form with the 
+First name, Last name (keep them 
+Email
+Password
+Confirm Passoword
+Captcha
+Image for captcha
+Register button
+Bonus: I accept the T&C checkbox
+
+
+

@@ -1,0 +1,120 @@
+	public static void printCityDetails(List<City> city) {
+//		if (result != null) {
+//			System.out.println("\nId\tName\tCountryCode\tDistrict\tPopulation");
+//			try {
+//				if (!result.next()) {
+//					System.out.println("Empty set!");
+//				} else {
+//					do {
+//						int id = result.getInt(1);
+//						String name = result.getString(2);
+//						String countryCode = result.getString(3);
+//						String district = result.getString(4);
+//						int population = result.getInt(5);
+//						System.out.println(id + "\t" + name + "\t" + countryCode + "\t" + district + "\t" + population);
+//					} while (result.next());
+//				}
+//			} catch (SQLException | NullPointerException e) {
+//				System.out.println("Error while printing the city details: " + e);
+//			}
+//		} else {
+//			System.out.println("ResultSet null");
+//		}
+		for (City cities : city) {
+			System.out.print(cities.getId() + " ");
+			System.out.print(cities.getName() + " ");
+			System.out.print(cities.getCountryCode() + " ");
+			System.out.print(cities.getDistrict() + " ");
+			System.out.println(cities.getPopulation());
+
+		}
+
+	}
+__________________________________________________________________________________________
+	public static void printAllCountryDetails(List<Country> country) {
+//		if (result != null) {
+//			try {
+//				if (!result.next()) {
+//					System.out.println("Empty set!");
+//				} else {
+//					do {
+//						String Code = result.getString(1);
+//						String Name = result.getString(2);
+//						String Continent = result.getString(3);
+//						String Region = result.getString(4);
+//						Float SurfaceArea = result.getFloat(5);
+//						int IndepYear = result.getInt(6);
+//						int Population = result.getInt(7);
+//						Float LifeExpectancy = result.getFloat(8);
+//						Float GNP = result.getFloat(9);
+//						Float GNPOld = result.getFloat(10);
+//						String LocalName = result.getString(11);
+//						String GovermentForm = result.getString(12);
+//						String HeadOfState = result.getString(13);
+//						int Capital = result.getInt(14);
+//						String Code2 = result.getString(15);
+//
+//						System.out.println(Code + "\t" + Name + "\t" + Continent + "\t" + Region + "\t" + SurfaceArea
+//								+ "\t" + IndepYear + "\t" + Population + "\t" + LifeExpectancy + "\t" + GNP + "\t"
+//								+ GNPOld + "t" + LocalName + "\t" + GovermentForm + "\t" + HeadOfState + "\t" + Capital
+//								+ "\t" + Code2);
+//					} while (result.next());
+//				}
+//			} catch (SQLException | NullPointerException e) {
+//				System.out.println("Error while printing the country details: " + e);
+//			}
+//		} else {
+//			System.out.println("ResultSet null");
+//		}
+		for (Country countries : country) {
+			System.out.println(countries.getCode());
+			System.out.println(countries.getName());
+			System.out.println(countries.getContinent());
+			System.out.println(countries.getRegion());
+			System.out.println(countries.getSurfaceArea());
+			System.out.println(countries.getIndepYear());
+			System.out.println(countries.getPopulation());
+			System.out.println(countries.getLifeExpectancy());
+			System.out.println(countries.getGNP());
+			System.out.println(countries.getGNPOld());
+			System.out.println(countries.getLocalName());
+			System.out.println(countries.getGovermentform());
+			System.out.println(countries.getHeadOfState());
+			System.out.println(countries.getCapital());
+			System.out.println(countries.getCode2());
+		}
+
+	}
+__________________________________________________________________________________
+	public static void printCountryDetailsGroupedByContinent(List<Country> countries) {
+//		if (result != null) {
+//			System.out.println("\ncount\tContinent");
+//			try {
+//				if (!result.next()) {
+//					System.out.println("Empty set!");
+//				} else {
+//					do {
+//
+//						int count = result.getInt(1);
+//						String continent = result.getString(2);
+//
+//						// System.out.println();
+//						System.out.println(count + "\t" + continent);
+//
+//					} while (result.next());
+//				}
+//			} catch (SQLException | NullPointerException e) {
+//				System.out.println("Error while printing the country details: " + e);
+//			}
+//		} else {
+//			System.out.println("ResultSet null");
+//		}
+//	}
+		for (Country country : countries) {
+			System.out.println(country.getCount());
+			System.out.println(country.getContinent());
+		}
+	}
+_____________________________________________________________________________
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.exe
+spring suitetools

@@ -1,0 +1,126 @@
+Create a Stored Procedure which takes the department name
+as input and displays the details of each worker of that
+department. The procedure also returns the count of workers
+of that department. After calling the function and getting the
+count, display it.
+_____________________________________________________________________________
+
+DELIMITER &&
+CREATE PROCEDURE get_worker_details (IN dept char(25),OUT count_Worker int)
+BEGIN
+SELECT * from Worker WHERE DEPARTMENT=dept;
+SELECT COUNT(*) INTO count_Worker from Worker WHERE DEPARTMENT=dept;
+END
+&&
+
+DELIMITER ;
+
+CALL get_worker_details('Admin',@count_worker);
+
+SELECT @count_worker; 
+
+____________________________________________________________________________________
+DELIMITER &&
+
+CREATE PROCEDURE get_salary_max_min(INOUT sal INT)
+BEGIN
+SELECT * FROM WORKER WHERE SALARY >=var1;
+SELECT MIN(SALARY) into sal FROM WORKER WHERE SALARY >=sal;
+END
+&&
+
+DELIMITER ;
+
+SET@sal=80,000;
+
+CALL get_salary_max_min(@sal); 
+
+________________________________________________________________________________________________________________________________________________________________
+
+CREATE PROCEDURE createNameList (INOUT nameList varchar(4000)) BEGIN DECLARE finished INTEGER DEFAULT 0; DECLARE name varchar(100) DEFAULT "";  DECLARE curName CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS NAME FROM Worker;  DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;  OPEN curName;  getName: LOOP FETCH curName INTO name; IF finished = 1 THEN LEAVE getName; END IF; SET nameList = CONCAT(name, "; ", nameList); END LOOP
+getName;  CLOSE curName; END
+_______________________________________________________________________________________________________________________________________________________________________________
+
+CREATE PROCEDURE createDeptNameList (INOUT List1 varchar(4000),INOUT List2 varchar(4000),INOUT List3 varchar(4000))
+BEGIN DECLARE finished INTEGER DEFAULT 0;
+DECLARE namelist1 varchar(100) DEFAULT "";
+DECLARE namelist2 varchar(100) DEFAULT "";
+DECLARE namelist3 varchar(100) DEFAULT "";
+DECLARE curDept1 CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS AdminGroup FROM Worker where DEPARTMENT = 'Admin' order by SALARY desc;
+DECLARE curDept2 CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS HRGoup FROM Worker where DEPARTMENT = 'HR' order by SALARY desc;
+DECLARE curDept3 CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS AccountGroup FROM Worker where DEPARTMENT = 'Account' order by SALARY desc;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+OPEN CurDept1;  getName: LOOP
+FETCH curDept1 INTO namelist1;
+IF finished = 1
+THEN LEAVE getName;
+END IF;
+SET List1 = CONCAT_WS("; ",namelist1, List1);
+END LOOP getName;
+CLOSE curDept1;
+Set finished = 0;
+OPEN CurDept2;  getName2: LOOP
+FETCH curDept2 INTO namelist2;
+IF finished = 1
+THEN LEAVE getName2;
+END IF;
+SET List2 = CONCAT_WS("; ",namelist2, List2);
+END LOOP getName2;
+CLOSE curDept2;
+Set finished = 0;
+OPEN CurDept3;  getName3: LOOP
+FETCH curDept3 INTO namelist3;
+IF finished = 1
+THEN LEAVE getName3;
+END IF;
+SET List3 = CONCAT_WS("; ",namelist3, List3);
+END LOOP getName3;
+CLOSE curDept3;  
+END
+&&
+DELIMITER ;
+set@List1 = "";
+set@List2 = "";
+set@List3 = "";
+call createDeptNameList(@List1,@List2,@List3);
+select @List1,@List2,@List3; 
+
+_____________________________________________________________________________________________________________________________________________________________________
+CREATE PROCEDURE createDeptNameList2 (INOUT List1 varchar(4000),INOUT List2 varchar(4000),INOUT List3 varchar(4000))
+BEGIN DECLARE finished INTEGER DEFAULT 0;
+DECLARE namelist1 varchar(100) DEFAULT "";
+DECLARE namelist2 varchar(100) DEFAULT "";
+DECLARE namelist3 varchar(100) DEFAULT "";
+DECLARE curDept1 CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS AdminGroup FROM Worker where DEPARTMENT = 'Admin' order by SALARY desc;
+DECLARE curDept2 CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS HRGoup FROM Worker where DEPARTMENT = 'HR' order by SALARY desc;
+DECLARE curDept3 CURSOR FOR SELECT CONCAT(FIRST_NAME, " ", LAST_NAME) AS AccountGroup FROM Worker where DEPARTMENT = 'Account' order by SALARY desc;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+OPEN CurDept1;
+OPEN CurDept2;
+OPEN CurDEPT3;
+getName: LOOP
+FETCH curDept1 INTO namelist1;
+FETCH curDept2 INTO namelist2;
+FETCH curDept3 INTO namelist3;
+IF finished = 1
+THEN LEAVE getName;
+END IF;
+SET List1 = CONCAT_WS("; ",namelist1, List1);
+SET List2 = CONCAT_WS("; ",namelist2, List2);
+SET List3 = CONCAT_WS("; ",namelist3, List3);
+END LOOP getName;
+CLOSE curDept1;
+CLOSE curDept2;
+CLOSE curDept3;
+END
+&&
+DELIMITER ;
+set@List1 = "";
+set@List2 = "";
+set@List3 = "";
+call createDeptNameList2(@List1,@List2,@List3);
+select @List1,@List2,@List3; 
+
+   
+
+

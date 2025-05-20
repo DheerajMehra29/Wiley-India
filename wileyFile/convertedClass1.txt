@@ -1,0 +1,46 @@
+class Outer extends java.lang.Object {
+	public final Outer this;
+	public Outer(Object o){
+		super();
+		this = (Outer)o;
+		this.data = 10;
+		access$000(this);
+		this.data = 20;
+		access$100(this);
+	}
+	public Outer(Object o, java.lang.Integer x, java.lang.Integer y){
+		super();
+		this = (Outer)o;
+		this.data = x;
+		access$000(this);
+		this.data = y;
+		access$100(this);
+	}
+	static java.lang.Integer access$000(Outer obj);
+	static java.lang.Integer access$100(Outer obj);
+}
+
+	class Outer$Inner extends java.lang.Object {
+		java.lang.Integer x;
+		public final Outer$Inner this;
+		public final Outer this$0;
+
+		public Outer$Inner(Object o, Outer obj){
+			super();
+			this = (Outer$Inner)o;
+			this$0 = obj;
+		}
+
+		public Outer$Inner(Object o, Outer obj, java.lang.Integer x){
+			super();
+			this = (Outer$Inner)o;
+			this$0 = obj;
+			this.x = x;
+		}
+		
+		public void foo() {
+			System.out.println(new StringBuilder("Instance variables of outer class:: ").append(this.x).append(" ").append(Outer.access$100(this$0).toString()));
+			System.out.println(new StringBuilder("Instance variables of inner class:: ").append(this.x)
+		}
+	}	
+}

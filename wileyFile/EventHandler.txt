@@ -1,0 +1,60 @@
+@Bean
+   public ContextRefreshListener contextRefreshListener() {
+       return new ContextRefreshListener();
+   }
+_______________________________________________________________________________________________
+
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ContextRefreshListener2 {
+    @EventListener
+    public void handleContextRefresh(ContextRefreshedEvent contextRefreshedEvent) {
+        System.out.println("context refresh event");
+    }
+}
+__________________________________________________________________________________________________
+Normal flow of execution (scope = singleton, lazy-init = false)
+1. Object of student bean created.
+2. Post processor before initilization method invoked.
+3. Then values are assigned to data members.
+4. The initializer method of the bean class gets invoked.
+5. Post processors after initialization method invoked.
+6. Context.start() executed.
+7. Rest of the logic in driver(MainApp) executed.
+	i. Context.getbean(Student) executed. => already existing object of student bean returned.
+8. Context.stop() executed.
+9. Context.close() executed.
+______________________________________________________________________________________________________________
+Normal flow of execution (scope = singleton, lazy-init = true)
+1. Object of context class created.
+2. Context.start() executed.
+3. Rest of the logic in driver(MainApp) executed.
+	i. Context.getbean(Student) executed.
+	ii. Object of student bean created.
+	iii. Post processor before initilization method invoked.
+	iv. Then values are assigned to data members.
+	v. The initializer method of the bean class gets invoked.
+	vi. Post processors after initialization method invoked. 
+4. Context.stop() executed.
+5. Context.close() executed.
+_________________________________________________________________________________________________________________________________
+Normal flow of execution (scope = prototype, lazy-init = true/false)
+1. Object of context class created.
+2. Context.start() executed.
+3. Rest of the logic in driver(MainApp) executed.
+	i. Context.getbean(Student) executed.
+	ii. Object of student bean created.
+	iii. Post processor before initilization method invoked.
+	iv. Then values are assigned to data members.
+	v. The initializer method of the bean class gets invoked.
+	vi. Post processors after initialization method invoked. 
+4. Context.stop() executed.
+5. Context.close() executed.
+
+
+
+

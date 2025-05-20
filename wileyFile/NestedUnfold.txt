@@ -1,0 +1,64 @@
+class Outer {
+    private int x;
+    private int y;
+
+    Outer() {
+        x = 10;
+        y = 20;
+    }
+
+    Outer(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    class Inner {
+        private int x;
+
+        Inner() {
+
+        }
+
+        Inner(int x) {
+            this.x = x;
+        }
+
+        public void foo() {
+            System.out.println("Instance variables of outer class:: " + x + " " + y);
+            System.out.println("Instance variable of inner class:: " + x);
+        }
+    }
+}
+
+class Outer extends java.lang.Object {
+public final Outer this$0;
+//public final Outer this$1;
+public Outer(Object o) {
+super();
+this = (Outer)o;
+access$000(this);
+access$100(this);
+
+}
+public outer(java.lang.Integer x,java.lang.Integer y) {
+this.data = x;
+access$000(this);
+this.data = y;
+access$100(this);
+}
+static java.lang.Integer access$000(Outer obj);
+static java.lang.Integer access$100(Outer obj);
+class Outer$Inner extends java.lang.Object {
+private java.lang.Integer x;
+public final outer$Inner this;
+public final outer this$0;
+public Outer$Inner(Object o,Outer obj) {
+super();
+this$0 = obj;
+}
+public void foo() {
+syso(new String Builder("Instance variables of outer class::").append(Outer.access$000(this$0)
+.append(Outer.access$100(this$0).toString()));
+syso(new String Builder("Instance variable of inner class::").append(Outer.access$000(this$x).toString()));
+}
+}

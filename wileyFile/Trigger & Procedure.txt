@@ -1,0 +1,141 @@
+create Table Accounts(Acc_No int,Amount decimal(10,2)); 
+SET @totalamount=0;
+SET @withdrawl=0; 
+SET @deposit=0;
+DELIMITER &&
+Create Trigger before_insert_totalamount BEFORE INSERT ON Accounts for each Row Begin Set @totalamount= @totalamount+NEW.Amount; END&&
+Create Trigger  Create Trigger before_insert_withdrawl_deposit BEFORE INSERT ON Accounts for each Row precedes before_insert_totalamount Begin IF New.Amount < 0 then set @withdrawl=@withdrawl + new.Amount; ELSE  set @deposit=@deposit + new.Amount; END IF; END&&
+DELIMITER ;  
+Insert into Accounts values(125,4000);
+Insert into Accounts values(129,-3000);
+SELECT @totalamount;
+SELECT @withdrawl;
+SELECT @deposit;
+
+
+__________________________________________________________________________________________________________________
+
+
+Create a Stored Procedure which takes the department name
+as input and displays the details of each worker of that
+department. The procedure also returns the count of workers
+of that department. After calling the function and getting the
+count, display it.
+_____________________________________________________________________________
+
+DELIMITER &&
+CREATE PROCEDURE get_worker_details (IN dept char(25),OUT count_Worker int)
+BEGIN
+SELECT * from Worker WHERE DEPARTMENT=dept;
+SELECT COUNT(*) INTO count_Worker from Worker WHERE DEPARTMENT=dept;
+END
+&&
+
+DELIMITER ;
+
+CALL get_worker_details('Admin',@count_worker);
+
+SELECT @count_worker; 
+
+____________________________________________________________________________________
+DELIMITER &&
+
+CREATE PROCEDURE get_salary_max_min(INOUT sal INT)
+BEGIN
+SELECT * FROM WORKER WHERE SALARY >=var1;
+SELECT MIN(SALARY) into sal FROM WORKER WHERE SALARY >=sal;
+END
+&&
+
+DELIMITER ;
+
+SET@sal=80,000;
+
+CALL get_salary_max_min(@sal); 
+
+________________________________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________-
+CREATE PROCEDURE print_table_for_loop () BEGIN DECLARE y INT DEFAULT 0; SET y = 0; my_label: LOOP IF y >= 10 THEN LEAVE my_label; END IF; SET y = y + 1; SELECT y*10; ITERATE my_label; END LOOP; END&&
+CREATE PROCEDURE while_loop_demo () BEGIN DECLARE x INT DEFAULT 0; SET x = 0; WHILE x < 10 DO SET x = x + 1; SELECT x*5; END WHILE; END;&&
+delimiter $
+create procedure tablesTillN(in n int)
+begin
+declare i int;
+declare mytable varchar(225);
+declare itr int;
+set i=1;
+while i<=n do
+	set itr=1;
+	set mytable='';
+	while itr<=10 do
+	set mytable=concat(mytable,i*itr,'->');
+set itr=itr+1; 
+	end while;
+	set mytable=concat(table,i*itr,'END');
+	select mytable;
+	set i=i+1;
+end while;
+end $
+_________________________________________________________________________________________________
+DELIMITER &&
+CREATE PROCEDURE REV(INOUT a INT)
+BEGIN
+DECLARE dig INT;
+DECLARE ans INT;
+SET ans=0;
+WHILE a>0
+DO
+SET dig=a%10;
+SET ans=ans*10+dig;
+SET a=floor(a/10);
+END WHILE;
+SELECT ans INTO a;
+END &&
+
+_________________________________________________________________________________________________
+CREATE PROCEDURE REVERSE_NUMBER(INOUT NUM INT)
+ BEGIN DECLARE VAR INT DEFAULT 0;
+ DECLARE TEMP INT DEFAULT 
+WHILE NUM>0 DO SET TEMP=NUM%10;
+ SET VAR=VAR*10+TEMP;
+ SET NUM=NUM/10;
+ END WHILE;
+ SET NUM=VAR;
+ END&&
+_______________________________________________________________________________________________________
+CREATE EVENT IF NOT EXISTS recurring_event_demo ON SCHEDULE EVERY 1 SECOND STARTS CURRENT_TIMESTAMP ENDS CURRENT_TIMESTAMP + INTERVAL 1 MINUTE ON COMPLETION PRESERVE DO INSERT INTO Worker(FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES('Test', 'Subject', 100, NOW(), 'Admin');
+CREATE EVENT IF NOT EXISTS insert_record_worker_event ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 MINUTE ON COMPLETION PRESERVE DO INSERT INTO Worker VALUES (12, 'Test', 'Subject3', 300, NOW(), 'HR');
+
+create table User_new(id int NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(20),email varchar(50) NOT NULL UNIQUE,password varchar(20) NOT NULL,created_at DATETIME,updated_at DATETIME,deleted boolean );
+CREATE TRIGGER before_insert_created_at BEFORE INSERT On User_new for each ROW Begin  SET new.created_at = NOW(); END&&
+CREATE TRIGGER before_insert_updated_at BEFORE INSERT On User_new for each ROW Begin  SET new.created_at = NOW(); END&&
+CREATE TRIGGER before_update_updated_at BEFORE UPDATE On User_new for each ROW Begin  SET new.created_at = NOW(); END&& 
+ ________________________________________________________________________________________________________________________________
+CREATE TABLE SupplierProducts (
+CREATE PROCEDURE InsertSupplierProduct(
+    IN inSupplierId INT, 
+    IN inProductId INT
+)
+BEGIN
+    -- exit if the duplicate key occurs
+    DECLARE EXIT HANDLER FOR 1062
+    BEGIN
+ 	SELECT CONCAT('Duplicate key (',inSupplierId,',',inProductId,') occurred') AS message;
+    END;
+    
+    -- insert a new row into the SupplierProducts
+    INSERT INTO SupplierProducts(supplierId,productId)
+    VALUES(inSupplierId,inProductId);
+    
+    -- return the products supplied by the supplier id
+    SELECT COUNT(*) 
+    FROM SupplierProducts
+    WHERE supplierId = inSupplierId;
+    
+END
+
+______________________________________________________________________________________________________________
+SELECT T.CODE, SUM(T.NET_PRICE_PER_ACTION) AS NET_PROFIT FROM (SELECT CODE, IF(ACTION = 'sell', SUM(price), -SUM(price)) AS NET_PRICE_PER_ACTION, ACTION FROM stock GROUP BY code, action) AS T GROUP BY T.CODE;
+SELECT code,sum(If(action='sell',price,-price)) as NET_PROFIT from stock group by code ;
+SELECT T.CODE, SUM(IF(T.NET_PRICE_PER_ACTION < 1000, T.NET_PRICE_PER_ACTION, IF(T.ACTION = 'buy', T.NET_PRICE_PER_ACTION - 0.05 * T.NET_PRICE_PER_ACTION, T.NET_PRICE_PER_ACTION - 0.1 * T.NET_PRICE_PER_ACTION))) AS NET_PROFIT FROM (SELECT CODE, IF(ACTION = 'sell', SUM(price), -SUM(price)) AS NET_PRICE_PER_ACTION, ACTION FROM stock GROUP BY code, action) AS T GROUP BY T.CODE;
+                                   
